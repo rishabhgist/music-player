@@ -9,6 +9,8 @@ const progress = document.getElementById('progress');
 const prevBtn = document.getElementById('prev');
 const playBtn = document.getElementById('play');
 const nextbtn = document.getElementById('next');
+const currentTimeEl = document.getElementById('current-time');
+const durationEl = document.getElementById('duration');
 
 let isPlaying = false;
 
@@ -95,6 +97,24 @@ function updateProgress(e) {
         const { duration, currentTime } = e.srcElement;
         const progressPrecentage = (currentTime / duration) * 100;
         progress.style.width = `${progressPrecentage}%`;
+        const durationMin = Math.floor(duration / 60);
+        let durationSeconds = Math.floor(duration % 60);
+        if (durationSeconds < 10) {
+            durationSeconds = `0${durationSeconds}`;
+        }
+        if (duration) {
+            durationEl.textContent = `${durationMin}:${durationSeconds}`;
+        }
+
+        // Display Current Time
+        const currentMin = Math.floor(currentTime / 60);
+        let currentSeconds = Math.floor(currentTime % 60);
+        if (currentSeconds < 10) {
+            currentSeconds = `0${currentSeconds}`;
+        }
+        if (currentTime) {
+            currentTimeEl.textContent = `${currentMin}:${currentSeconds}`;
+        }
     }
 }
 
